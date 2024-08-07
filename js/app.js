@@ -62,54 +62,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const feelsLike = document.getElementById('feels-like');
     const windSpeed = document.getElementById('wind-speed');
     const humidity = document.getElementById('humidity');
-    const uvIndex = document.getElementById('uv-index');
-    const visibility = document.getElementById('visibility');
     const pressure = document.getElementById('pressure');
+    const visibility = document.getElementById('visibility');
     const forecastContainer = document.getElementById('forecast-container');
 
     const apiKey = '3174b3d2824a844a920b665a028e02b7';
 
-    // Get user's IP address and location
-    fetch('https://api.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => {
-            const ip = data.ip;
-            return fetch(`http://ip-api.com/json/${ip}`);
-        })
-        .then(response => response.json())
-        .then(data => {
-            const { city, lat, lon } = data;
-            locationName.textContent = city;
+    // Check if geolocation is supported and get the user's coordinates
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            const { latitude: lat, longitude: lon } = position.coords;
 
-           const apiKey='3174b3d2824a844a920b665a028e02b7'; // Fetch weather data using latitude and longitude
-            return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
-        })
-        .then(response => response.json())
-        .then(data => {
-            const current = data.list[0];
-            const temperature = current.main.temp;
-            const description = current.weather[0].description;
-            const feels_like = current.main.feels_like;
-            const wind_speed = current.wind.speed;
-            const humidity_value = current.main.humidity;
-            const pressure_value = current.main.pressure;
-            const visibility_value = current.visibility;
+            // Fetch weather data using latitude and longitude
+            fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
+                .then(response => response.json())
+                .then(data => {
+                    const current = data.list[0];
+                    const temperature = current.main.temp;
+                    const description = current.weather[0].description;
+                    const feels_like = current.main.feels_like;
+                    const wind_speed = current.wind.speed;
+                    const humidity_value = current.main.humidity;
+                    const pressure_value = current.main.pressure;
+                    const visibility_value = current.visibility;
 
-            currentTemp.textContent = `${Math.round(temperature)}°C`;
-            weatherDesc.textContent = description.charAt(0).toUpperCase() + description.slice(1);
-            feelsLike.textContent = `Feels Like: ${Math.round(feels_like)}°C`;
-            windSpeed.textContent = `Wind: ${Math.round(wind_speed)} m/s`;
-            humidity.textContent = `Humidity: ${humidity_value}%`;
-            pressure.textContent = `Pressure: ${pressure_value} hPa`;
-            visibility.textContent = `Visibility: ${visibility_value / 1000} km`;
+                    locationName.textContent = data.city.name; // City name from OpenWeatherMap API response
+                    currentTemp.textContent = `${Math.round(temperature)}°C`;
+                    weatherDesc.textContent = description.charAt(0).toUpperCase() + description.slice(1);
+                    feelsLike.textContent = `Feels Like: ${Math.round(feels_like)}°C`;
+                    windSpeed.textContent = `Wind: ${Math.round(wind_speed)} m/s`;
+                    humidity.textContent = `Humidity: ${humidity_value}%`;
+                    pressure.textContent = `Pressure: ${pressure_value} hPa`;
+                    visibility.textContent = `Visibility: ${visibility_value / 1000} km`;
 
-            const forecastDays = data.list.filter(item => item.dt_txt.includes("12:00:00")).slice(1, 6);
-            forecastContainer.innerHTML = forecastDays.map(day => `
-                <div class="day">
-                    <p>${new Date(day.dt_txt).toLocaleDateString('en-US', { weekday: 'short' })}</p>
-                    <p>${Math.round(day.main.temp)}°C</p>
-                    <p>${Math.round(day.main.temp_min)}°C</p>
-                </div>
-            `).join('');
+                    const forecastDays = data.list.filter(item => item.dt_txt.includes("12:00:00")).slice(1, 6);
+                    forecastContainer.innerHTML = forecastDays.map(day => `
+                        <div class="day">
+                            <p>${new Date(day.dt_txt).toLocaleDateString('en-US', { weekday: 'short' })}</p>
+                            <p>${Math.round(day.main.temp)}°C</p>
+                            <p>${Math.round(day.main.temp_min)}°C</p>
+                        </div>
+                    `).join('');
+                })
+                .catch(error => console.error('Error fetching weather data:', error));
+        }, error => {
+            console.error('Error getting geolocation:', error);
         });
+    } else {
+        console.error('Geolocation is not supported by this browser.');
+    }
 });
