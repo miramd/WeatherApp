@@ -68,7 +68,7 @@ body {
   padding: 10px;
   justify-content: center;
   align-items: center;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .forecast-section {
@@ -107,8 +107,8 @@ body {
   color: white;
   font-size: small;
   margin:0;
-    margin-left: -300px;
-    margin-top: 30px;
+  margin-left: -300px;
+  margin-top: 30px;
 }
   
 
@@ -140,13 +140,15 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
+  height: 28vh;
   
 }
 
 .forecast-flex {
-  display: flex;
-  justify-content: space-between;
+ display: flex; 
+  justify-content: space-around;
   width: 100%;
+  height: 70vh;
 }
 
 .day {
@@ -154,38 +156,53 @@ body {
 }
 
 @media (max-width: 768px) {
+  body{
+    overflow: auto;
+  }
   .flex-item {
       width: 90px;
       height: 80px;
   }
   .details-flex {
       flex-direction: row;
+      overflow: auto;
   }
   #main-wrapper {
-      margin-top: 50px;
+    width: fit-content;
+      /* margin-top: 50px; */
       padding: 10px;
   }
   .header-section {
-      height: auto;
+      height: 20vh;
       flex-direction: column;
-      padding: 10px;
+      padding: 5px;
   }
-  #location-name, #current-temp {
+  #location-name{
       font-size: 20px;
       margin: 10px;
+      margin-bottom: 20px;
+  }
+
+  #current-temp{
+    font-size: 20px;
+      margin: 10px;
+      margin-bottom: -10px;
   }
   #weather-desc {
       font-size: small;
       text-align: center;
       margin-top: 20px;
+      margin:0;
+      margin-left: -150px;
+      margin-top: 30px;
   }
   .content-row {
       flex-direction: column;
       align-items: center;
-      margin-left: 0;
+      margin-left: 10%;
   }
   #details-title {
-      margin-left: 0;
+      margin-left:10%;
       text-align: center;
   }
   .details-section {
