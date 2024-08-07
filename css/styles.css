@@ -48,7 +48,7 @@ body {
 .temp-weather-container {
   display: flex;
   align-items: center;
-  justify-content: space-evenly; /* Align items vertically in the center */
+  justify-content: space-evenly; 
 }
 
 
@@ -167,7 +167,7 @@ h2 {
   }
 
   .flex-item {
-    width: 80px; /* Adjusted size for better fit */
+    width: 80px; 
     height: 80px;
   }
 
@@ -182,7 +182,7 @@ h2 {
   }
 
   .header-section {
-    height: auto; /* Adjusted height for better visibility */
+    height: auto; 
     padding: 10px;
   }
 
@@ -192,14 +192,14 @@ h2 {
   }
 
   #current-temp {
-    font-size: 30px; /* Adjusted font size for better visibility */
+    font-size: 30px; 
     margin: 10px;
   }
 
   #weather-desc {
-    font-size: 16px; /* Increased font size for readability */
-    text-align: left; /* Align text to the left */
-    margin-left: 20px; /* Ensure it appears next to the temperature */
+    font-size: 16px; 
+    text-align: left; 
+    margin-left: 20px;
   }
 
   .content-row {
@@ -237,6 +237,5 @@ h2 {
   }
 
   #weather-desc {
-    font-size: 16px; /* Increased font size for readability */
-  }
+    font-size: 16px; 
 }
