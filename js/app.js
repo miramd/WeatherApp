@@ -14,11 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             const ip = data.ip;
-            return fetch(`http://api.ipstack.com/${ip}?access_key=95d551f63ac5b256feb35f8e6a11ef64`);
+            return fetch(`http://ip-api.com/json/${ip}`);
         })
         .then(response => response.json())
         .then(data => {
-            const city = data.location.capital;
+            const city = data.city;
             locationName.textContent = city;
             const apiKey = '3174b3d2824a844a920b665a028e02b7';
             return fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`);

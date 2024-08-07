@@ -140,6 +140,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
+  padding-top: 0px;
   height: 28vh;
   
 }
