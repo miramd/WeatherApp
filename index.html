@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    <div id="main-wrapper">
+        <div class="header-section" id="current-weather">
+            <h1 id="location-name">New York</h1>
+            <h2 id="current-temp">61°</h2>
+            <p id="weather-desc">Overcast</p>
+        </div>
+        <h2 id="details-title">Weather Details</h2>
+        <div class="content-row">
+            <div class="details-section">
+                <div class="details-flex">
+                    <div id="feels-like" class="flex-item">Feels Like: 57°</div>
+                    <div id="wind-speed" class="flex-item">Wind: 13 mi/h</div>
+                    <div id="humidity" class="flex-item">Humidity: 82%</div>
+                    <div id="uv-index" class="flex-item">UV Index: 0</div>
+                    <div id="visibility" class="flex-item">Visibility: 7 mi</div>
+                    <div id="pressure" class="flex-item">Pressure: 1022 hPa</div>
+                </div>
+            </div>
+            <div class="forecast-section">
+                <h2>5-Day Weather Forecast</h2>
+                <div class="forecast-flex" id="forecast-container">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/app.js"></script>
+</body>
+
+</html>
